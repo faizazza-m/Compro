@@ -12,6 +12,10 @@ $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::attemptLogin');
 $routes->get('logout', 'Auth::logout');
 
+// Google OAuth Routes
+$routes->get('auth/google', 'GoogleAuth::login');
+$routes->get('auth/google/callback', 'GoogleAuth::callback');
+
 // Frontend - Produk
 $routes->get('produk', 'Produk::index');
 $routes->get('produk/kategori/(:segment)', 'Produk::kategori/$1');
@@ -21,6 +25,14 @@ $routes->get('produk/(:segment)', 'Produk::detail/$1');
 $routes->get('order/success/(:segment)', 'Order::success/$1');
 $routes->get('order/(:segment)', 'Order::create/$1');
 $routes->post('order/store', 'Order::store');
+
+// Frontend - Payment
+$routes->get('payment/(:segment)', 'Payment::create/$1');
+$routes->post('payment/store', 'Payment::store');
+$routes->get('payment/status/(:segment)', 'Payment::status/$1');
+
+// Customer - Riwayat Pesanan (harus login)
+$routes->get('pesanan-saya', 'Order::myOrders');
 
 // Admin Routes (protected by auth filter)
 $routes->group('admin', ['filter' => 'auth'], function ($routes) {
@@ -46,4 +58,8 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('pesanan', 'AdminOrder::index');
     $routes->get('pesanan/detail/(:num)', 'AdminOrder::detail/$1');
     $routes->post('pesanan/status/(:num)', 'AdminOrder::updateStatus/$1');
+
+    // Pembayaran
+    $routes->get('pembayaran', 'AdminPayment::index');
+    $routes->post('pembayaran/verify/(:num)', 'AdminPayment::verify/$1');
 });

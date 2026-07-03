@@ -168,8 +168,28 @@
         margin-top: 1.5rem;
     }
 
-    .btn-wa {
+    .btn-payment {
         flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 24px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        border-radius: var(--radius);
+        font-size: 1rem;
+        font-weight: 700;
+        transition: var(--transition);
+    }
+
+    .btn-payment:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+        color: white;
+    }
+
+    .btn-wa {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -178,7 +198,7 @@
         background: linear-gradient(135deg, #25D366, #128C7E);
         color: white;
         border-radius: var(--radius);
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 700;
         transition: var(--transition);
     }
@@ -209,8 +229,8 @@
 
     /* ====== TIPS ====== */
     .tips-card {
-        background: linear-gradient(135deg, #eff6ff, #dbeafe);
-        border: 1px solid #bfdbfe;
+        background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        border: 1px solid #a7f3d0;
         border-radius: var(--radius-lg);
         padding: 1.5rem 2rem;
         margin-bottom: 1.5rem;
@@ -219,7 +239,7 @@
     .tips-card h4 {
         font-size: 0.9rem;
         font-weight: 700;
-        color: #1e40af;
+        color: #065f46;
         margin-bottom: 0.75rem;
     }
 
@@ -227,7 +247,7 @@
         margin: 0;
         padding-left: 20px;
         font-size: 0.85rem;
-        color: #1e40af;
+        color: #065f46;
         line-height: 1.8;
     }
 
@@ -249,9 +269,9 @@
                 <i class="fas fa-check"></i>
             </div>
             <h1>Pesanan Berhasil! 🎉</h1>
-            <p>Terima kasih, pesanan Anda telah kami terima dan sedang diproses.</p>
+            <p>Terima kasih, pesanan Anda telah kami terima. Silakan lakukan pembayaran.</p>
             <div class="order-number"><?= esc($order['nomor_order']) ?></div>
-            <p><span class="status-badge status-pending"><i class="fas fa-clock"></i> Menunggu Konfirmasi</span></p>
+            <p><span class="status-badge status-pending"><i class="fas fa-clock"></i> Menunggu Pembayaran</span></p>
         </div>
 
         <!-- Customer Info -->
@@ -301,18 +321,22 @@
             <h4><i class="fas fa-lightbulb"></i> Langkah Selanjutnya</h4>
             <ul>
                 <li>Simpan nomor pesanan Anda: <strong><?= esc($order['nomor_order']) ?></strong></li>
-                <li>Klik tombol WhatsApp di bawah untuk konfirmasi pesanan ke admin</li>
-                <li>Admin akan menghubungi Anda untuk konfirmasi dan detail pembayaran</li>
+                <li>Klik tombol <strong>"Bayar Sekarang"</strong> untuk melakukan pembayaran via transfer bank</li>
+                <li>Upload bukti transfer agar pesanan segera diproses</li>
+                <li>Atau hubungi kami via WhatsApp untuk bantuan</li>
             </ul>
         </div>
 
         <!-- Action Buttons -->
         <div class="action-buttons">
             <a href="<?= base_url('produk') ?>" class="btn-catalog">
-                <i class="fas fa-arrow-left"></i> Kembali ke Katalog
+                <i class="fas fa-arrow-left"></i> Katalog
             </a>
             <a href="<?= $waLink ?>" target="_blank" class="btn-wa">
-                <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="<?= base_url('payment/' . $order['nomor_order']) ?>" class="btn-payment">
+                <i class="fas fa-credit-card"></i> Bayar Sekarang
             </a>
         </div>
     </div>

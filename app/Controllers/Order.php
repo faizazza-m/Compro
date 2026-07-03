@@ -73,16 +73,24 @@ class Order extends BaseController
         $db = \Config\Database::connect();
         $db->transStart();
 
-        // Insert order
-        $this->orderModel->save([
-            'nomor_order'    => $nomorOrder,
-            'nama_customer'  => $this->request->getPost('nama_customer'),
-            'no_whatsapp'    => $this->request->getPost('no_whatsapp'),
-            'alamat'         => $this->request->getPost('alamat'),
-            'catatan'        => $this->request->getPost('catatan'),
-            'total_harga'    => $subtotal,
-            'status'         => 'pending',
-        ]);
+        // Insert order with user_id if logged in
+        $orderData = [
+            'nomor_order'        => $nomorOrder,
+            'nama_customer'      => $this->request->getPost('nama_customer'),
+            'no_whatsapp'        => $this->request->getPost('no_whatsapp'),
+            'alamat'             => $this->request->getPost('alamat'),
+            'catatan'            => $this->request->getPost('catatan'),
+            'total_harga'        => $subtotal,
+            'metode_pembayaran'  => 'transfer_bank',
+            'status'             => 'pending',
+        ];
+
+        // Link to logged-in user
+        if (session()->get('isLoggedIn')) {
+            $orderData['user_id'] = session()->get('id');
+        }
+
+        $this->orderModel->save($orderData);
 
         $orderId = $this->orderModel->getInsertID();
 
@@ -122,7 +130,7 @@ class Order extends BaseController
         $details = $this->orderDetailModel->getDetailsByOrderId($order['id']);
 
         // Build WhatsApp message
-        $waMessage = "Halo, saya ingin konfirmasi pesanan:\n";
+        $waMessage = "Halo VespaPartID, saya ingin konfirmasi pesanan:\n";
         $waMessage .= "📋 No. Order: " . $order['nomor_order'] . "\n";
         $waMessage .= "👤 Nama: " . $order['nama_customer'] . "\n";
         $waMessage .= "📱 WA: " . $order['no_whatsapp'] . "\n";
@@ -148,5 +156,30 @@ class Order extends BaseController
         ];
 
         return view('frontend/order/success', $data);
+    }
+
+    /**
+     * My Orders - for logged-in users
+     */
+    public function myOrders()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $orders = $this->orderModel->getOrdersByUserId(session()->get('id'));
+
+        // Enrich orders with payment data
+        $paymentModel = new \App\Models\PaymentModel();
+        foreach ($orders as &$order) {
+            $order['payment'] = $paymentModel->getPaymentByOrderId($order['id']);
+        }
+
+        $data = [
+            'title'  => 'Pesanan Saya',
+            'orders' => $orders,
+        ];
+
+        return view('frontend/order/my_orders', $data);
     }
 }

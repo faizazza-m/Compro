@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'Admin Panel' ?> | AdminLTE</title>
+    <title><?= $title ?? 'Admin Panel' ?> | VespaPartID Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
@@ -74,8 +74,8 @@
         <!-- Sidebar -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="<?= base_url('admin') ?>" class="brand-link">
-                <i class="fas fa-user-shield brand-image ml-3"></i>
-                <span class="brand-text font-weight-light">Admin Panel</span>
+                <i class="fas fa-motorcycle brand-image ml-3"></i>
+                <span class="brand-text font-weight-light">VespaPartID</span>
             </a>
 
             <div class="sidebar">
@@ -120,6 +120,12 @@
                             <a href="<?= base_url('admin/pesanan') ?>" class="nav-link <?= strpos(current_url(), 'admin/pesanan') !== false ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>Pesanan Masuk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin/pembayaran') ?>" class="nav-link <?= strpos(current_url(), 'admin/pembayaran') !== false ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-credit-card"></i>
+                                <p>Verifikasi Pembayaran</p>
                             </a>
                         </li>
 
@@ -196,7 +202,7 @@
             <div class="float-right d-none d-sm-inline">
                 CodeIgniter 4 + AdminLTE 3
             </div>
-            <strong>&copy; <?= date('Y') ?> Admin Panel.</strong> All rights reserved.
+            <strong>&copy; <?= date('Y') ?> VespaPartID.</strong> All rights reserved.
         </footer>
     </div>
 

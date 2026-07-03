@@ -12,7 +12,7 @@ class OrderModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
 
-    protected $allowedFields = ['nomor_order', 'nama_customer', 'no_whatsapp', 'alamat', 'catatan', 'total_harga', 'status'];
+    protected $allowedFields = ['nomor_order', 'user_id', 'nama_customer', 'no_whatsapp', 'alamat', 'catatan', 'total_harga', 'metode_pembayaran', 'status'];
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -31,6 +31,13 @@ class OrderModel extends Model
     public function getOrderByNomor($nomorOrder)
     {
         return $this->where('nomor_order', $nomorOrder)->first();
+    }
+
+    public function getOrdersByUserId($userId)
+    {
+        return $this->where('user_id', $userId)
+                    ->orderBy('created_at', 'DESC')
+                    ->findAll();
     }
 
     public function generateNomorOrder()

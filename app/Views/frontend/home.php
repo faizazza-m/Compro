@@ -4,7 +4,7 @@
 <style>
     /* ====== HERO ====== */
     .hero {
-        background: linear-gradient(135deg, var(--primary) 0%, #0ea5e9 50%, #7c3aed 100%);
+        background: linear-gradient(135deg, #065f46 0%, #059669 40%, #0d9488 80%, #0ea5e9 100%);
         padding: 5rem 2rem;
         color: white;
         text-align: center;
@@ -48,6 +48,13 @@
         margin-bottom: 1rem;
     }
 
+    .hero h1 .highlight {
+        background: linear-gradient(to right, #fbbf24, #f59e0b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
     .hero p {
         font-size: 1.15rem;
         opacity: 0.9;
@@ -71,6 +78,19 @@
         transform: translateY(-3px);
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         color: var(--primary-dark);
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(8px);
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
     }
 
     /* ====== FEATURES ====== */
@@ -110,10 +130,10 @@
         font-size: 1.5rem;
     }
 
-    .feature-card:nth-child(1) .icon { background: #ede9fe; color: #7c3aed; }
-    .feature-card:nth-child(2) .icon { background: #dbeafe; color: #2563eb; }
-    .feature-card:nth-child(3) .icon { background: #d1fae5; color: #059669; }
-    .feature-card:nth-child(4) .icon { background: #fef3c7; color: #d97706; }
+    .feature-card:nth-child(1) .icon { background: #ecfdf5; color: #059669; }
+    .feature-card:nth-child(2) .icon { background: #fef3c7; color: #d97706; }
+    .feature-card:nth-child(3) .icon { background: #dbeafe; color: #2563eb; }
+    .feature-card:nth-child(4) .icon { background: #fce7f3; color: #db2777; }
 
     .feature-card h3 {
         font-size: 1rem;
@@ -165,7 +185,7 @@
 
     .product-card-home .pc-image {
         height: 200px;
-        background: linear-gradient(135deg, #667eea11, #764ba211);
+        background: linear-gradient(135deg, #05966911, #0ea5e911);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -234,7 +254,7 @@
     }
 
     .product-card-home .pc-btn:hover {
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        box-shadow: 0 4px 12px rgba(5, 150, 105, 0.4);
     }
 
     .view-all-btn {
@@ -255,9 +275,43 @@
         transform: translateY(-2px);
     }
 
+    /* ====== TRUST SECTION ====== */
+    .trust-section {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: 2.5rem;
+        margin: 1rem 0 3rem;
+        box-shadow: var(--shadow-sm);
+        text-align: center;
+    }
+
+    .trust-stats {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+    .trust-stat {
+        text-align: center;
+    }
+
+    .trust-stat .number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary);
+    }
+
+    .trust-stat .label {
+        font-size: 0.85rem;
+        color: var(--gray-500);
+    }
+
     @media (max-width: 768px) {
         .hero h1 { font-size: 2rem; }
         .hero { padding: 3rem 1rem; }
+        .trust-stats { gap: 1.5rem; }
     }
 </style>
 <?= $this->endSection() ?>
@@ -266,10 +320,13 @@
 <!-- Hero -->
 <section class="hero">
     <div class="hero-content">
-        <h1>Selamat Datang di Compro</h1>
-        <p>Website Company Profile dengan katalog produk lengkap. Temukan produk berkualitas dan pesan langsung secara online.</p>
+        <div class="hero-badge">
+            <i class="fas fa-shield-alt"></i> Sparepart Original & Berkualitas
+        </div>
+        <h1>Bengkel & Sparepart <span class="highlight">Vespa</span> Terlengkap</h1>
+        <p>Pusat sparepart vespa original dan aftermarket berkualitas. Dari vespa klasik hingga modern, semua tersedia di sini.</p>
         <a href="<?= base_url('produk') ?>" class="hero-btn">
-            <i class="fas fa-store"></i> Lihat Katalog Produk
+            <i class="fas fa-wrench"></i> Lihat Sparepart
         </a>
     </div>
 </section>
@@ -279,30 +336,54 @@
     <section class="features">
         <div class="features-grid">
             <div class="feature-card">
-                <div class="icon"><i class="fas fa-box-open"></i></div>
-                <h3>Katalog Produk</h3>
-                <p>Lihat katalog produk lengkap dengan berbagai kategori</p>
+                <div class="icon"><i class="fas fa-cogs"></i></div>
+                <h3>Sparepart Lengkap</h3>
+                <p>Ribuan sparepart vespa klasik & modern, original & aftermarket</p>
             </div>
             <div class="feature-card">
-                <div class="icon"><i class="fas fa-clipboard-list"></i></div>
-                <h3>Pesan Mudah</h3>
-                <p>Isi form order sederhana tanpa perlu daftar akun</p>
+                <div class="icon"><i class="fas fa-credit-card"></i></div>
+                <h3>Pembayaran Mudah</h3>
+                <p>Transfer bank dengan konfirmasi otomatis, aman dan cepat</p>
             </div>
             <div class="feature-card">
-                <div class="icon"><i class="fab fa-whatsapp"></i></div>
-                <h3>WhatsApp</h3>
-                <p>Konfirmasi pesanan langsung via WhatsApp</p>
+                <div class="icon"><i class="fas fa-shipping-fast"></i></div>
+                <h3>Pengiriman Cepat</h3>
+                <p>Kirim ke seluruh Indonesia dengan jasa ekspedisi terpercaya</p>
             </div>
             <div class="feature-card">
-                <div class="icon"><i class="fas fa-truck"></i></div>
-                <h3>Proses Cepat</h3>
-                <p>Admin memproses pesanan Anda dengan cepat</p>
+                <div class="icon"><i class="fas fa-headset"></i></div>
+                <h3>Konsultasi Gratis</h3>
+                <p>Tanya soal vespa kamu? Kami siap bantu via WhatsApp!</p>
+            </div>
+        </div>
+
+        <!-- Trust Section -->
+        <div class="trust-section">
+            <h2 class="section-title"><i class="fas fa-trophy" style="color: var(--accent);"></i> Kenapa Pilih VespaPartID?</h2>
+            <p class="section-subtitle">Dipercaya oleh ribuan pecinta vespa di seluruh Indonesia</p>
+            <div class="trust-stats">
+                <div class="trust-stat">
+                    <div class="number">5K+</div>
+                    <div class="label">Produk Tersedia</div>
+                </div>
+                <div class="trust-stat">
+                    <div class="number">10K+</div>
+                    <div class="label">Pesanan Selesai</div>
+                </div>
+                <div class="trust-stat">
+                    <div class="number">4.9★</div>
+                    <div class="label">Rating Pelanggan</div>
+                </div>
+                <div class="trust-stat">
+                    <div class="number">24/7</div>
+                    <div class="label">Support Online</div>
+                </div>
             </div>
         </div>
 
         <!-- Products -->
-        <h2 class="section-title"><i class="fas fa-fire" style="color: var(--danger);"></i> Produk Terbaru</h2>
-        <p class="section-subtitle">Koleksi produk terbaru kami yang siap untuk Anda pesan</p>
+        <h2 class="section-title"><i class="fas fa-fire" style="color: var(--danger);"></i> Sparepart Terbaru</h2>
+        <p class="section-subtitle">Koleksi sparepart terbaru yang siap untuk vespa kesayangan kamu</p>
 
         <?php if (empty($products)): ?>
             <div style="text-align: center; padding: 3rem; color: var(--gray-400);">
@@ -334,7 +415,7 @@
 
             <div style="text-align: center; margin: 2rem 0 3rem;">
                 <a href="<?= base_url('produk') ?>" class="view-all-btn">
-                    Lihat Semua Produk <i class="fas fa-arrow-right"></i>
+                    Lihat Semua Sparepart <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         <?php endif; ?>

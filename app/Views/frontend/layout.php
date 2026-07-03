@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'Company Profile' ?> | Compro</title>
-    <meta name="description" content="Website Company Profile dengan katalog produk dan pemesanan online.">
+    <title><?= $title ?? 'Bengkel Vespa' ?> | VespaPartID</title>
+    <meta name="description" content="Bengkel Vespa & Sparepart Original - Jual beli sparepart vespa berkualitas, servis vespa terpercaya.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #818cf8;
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #34d399;
             --secondary: #0ea5e9;
             --accent: #f59e0b;
             --success: #10b981;
@@ -93,21 +93,21 @@
         }
 
         .navbar-brand .brand-icon {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), #065f46);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         .navbar-nav {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             list-style: none;
         }
 
@@ -138,6 +138,138 @@
         .navbar-nav .btn-admin:hover {
             opacity: 0.9;
             transform: translateY(-1px);
+        }
+
+        /* User dropdown */
+        .user-dropdown {
+            position: relative;
+        }
+
+        .user-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--gray-100);
+        }
+
+        .user-dropdown-toggle:hover {
+            background: var(--gray-200);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-light);
+        }
+
+        .user-avatar-placeholder {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .user-dropdown-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .user-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-xl);
+            min-width: 200px;
+            z-index: 1001;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+
+        .user-dropdown-menu.show {
+            display: block;
+            animation: dropDown 0.2s ease;
+        }
+
+        @keyframes dropDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-dropdown-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            transition: var(--transition);
+        }
+
+        .user-dropdown-menu a:hover {
+            background: var(--gray-100);
+            color: var(--dark);
+        }
+
+        .user-dropdown-menu a.danger {
+            color: var(--danger);
+        }
+
+        .user-dropdown-menu a.danger:hover {
+            background: #fef2f2;
+        }
+
+        .user-dropdown-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 0;
+        }
+
+        /* Google login button */
+        .btn-google {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: white;
+            color: var(--dark);
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .btn-google:hover {
+            border-color: var(--primary);
+            background: #f0fdf4;
+            color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-google img {
+            width: 18px;
+            height: 18px;
         }
 
         /* Mobile menu toggle */
@@ -205,6 +337,18 @@
             color: var(--primary-light);
         }
 
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+        }
+
         /* ====== RESPONSIVE ====== */
         @media (max-width: 768px) {
             .navbar { padding: 0 1rem; }
@@ -234,6 +378,8 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .user-dropdown-name { display: none; }
         }
     </style>
     <?= $this->renderSection('styles') ?>
@@ -244,9 +390,9 @@
         <div class="navbar-inner">
             <a href="<?= base_url('/') ?>" class="navbar-brand">
                 <div class="brand-icon">
-                    <i class="fas fa-cube"></i>
+                    <i class="fas fa-motorcycle"></i>
                 </div>
-                Compro
+                VespaPartID
             </a>
 
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
@@ -255,8 +401,48 @@
 
             <ul class="navbar-nav" id="navbarNav">
                 <li><a href="<?= base_url('/') ?>" class="<?= current_url() == base_url('/') ? 'active' : '' ?>">Beranda</a></li>
-                <li><a href="<?= base_url('produk') ?>" class="<?= strpos(current_url(), '/produk') !== false ? 'active' : '' ?>">Produk</a></li>
-                <li><a href="<?= base_url('login') ?>" class="btn-admin"><i class="fas fa-lock mr-1"></i> Admin</a></li>
+                <li><a href="<?= base_url('produk') ?>" class="<?= strpos(current_url(), '/produk') !== false ? 'active' : '' ?>">Sparepart</a></li>
+
+                <?php if (session()->get('isLoggedIn')): ?>
+                    <?php if (session()->get('role') === 'admin'): ?>
+                        <li><a href="<?= base_url('admin') ?>" class="btn-admin"><i class="fas fa-cog"></i> Admin Panel</a></li>
+                    <?php endif; ?>
+                    <li class="user-dropdown">
+                        <div class="user-dropdown-toggle" onclick="toggleUserMenu()">
+                            <?php if (session()->get('avatar')): ?>
+                                <img src="<?= session()->get('avatar') ?>" alt="avatar" class="user-avatar">
+                            <?php else: ?>
+                                <div class="user-avatar-placeholder">
+                                    <?= strtoupper(substr(session()->get('nama_lengkap'), 0, 1)) ?>
+                                </div>
+                            <?php endif; ?>
+                            <span class="user-dropdown-name"><?= esc(session()->get('nama_lengkap')) ?></span>
+                            <i class="fas fa-chevron-down" style="font-size: 0.7rem; color: var(--gray-400);"></i>
+                        </div>
+                        <div class="user-dropdown-menu" id="userDropdownMenu">
+                            <a href="<?= base_url('pesanan-saya') ?>">
+                                <i class="fas fa-receipt"></i> Pesanan Saya
+                            </a>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="<?= base_url('logout') ?>" class="danger">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a href="<?= base_url('auth/google') ?>" class="btn-google">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="18" height="18">
+                                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+                            </svg>
+                            Login
+                        </a>
+                    </li>
+                    <li><a href="<?= base_url('login') ?>" class="btn-admin"><i class="fas fa-lock"></i> Admin</a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>
@@ -295,7 +481,11 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; <?= date('Y') ?> <strong>Compro</strong>. Dibuat dengan <i class="fas fa-heart" style="color: var(--danger);"></i> menggunakan CodeIgniter 4.</p>
+        <div class="footer-content">
+            <div class="footer-brand"><i class="fas fa-motorcycle"></i> VespaPartID</div>
+            <p>&copy; <?= date('Y') ?> <strong>VespaPartID</strong> — Bengkel & Sparepart Vespa Terpercaya</p>
+            <p style="margin-top: 0.5rem; font-size: 0.78rem; opacity: 0.7;">Jl. Vespa Klasik No. 17, Jakarta | <i class="fab fa-whatsapp"></i> 081234567890</p>
+        </div>
     </footer>
 
     <script>
@@ -307,6 +497,21 @@
         // Mobile menu toggle
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('navbarNav').classList.toggle('show');
+        });
+
+        // User dropdown toggle
+        function toggleUserMenu() {
+            const menu = document.getElementById('userDropdownMenu');
+            if (menu) menu.classList.toggle('show');
+        }
+
+        // Close dropdown on outside click
+        document.addEventListener('click', function(e) {
+            const dropdown = document.querySelector('.user-dropdown');
+            const menu = document.getElementById('userDropdownMenu');
+            if (dropdown && menu && !dropdown.contains(e.target)) {
+                menu.classList.remove('show');
+            }
         });
     </script>
     <?= $this->renderSection('scripts') ?>
