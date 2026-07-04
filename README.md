@@ -4,7 +4,6 @@ Website **Company Profile** dengan fitur **katalog produk** dan **sistem pemesan
 
 > **Versi 1** — Fokus pada alur: *lihat produk → isi order → admin proses*. Belum memerlukan payment gateway atau keranjang belanja rumit.
 
----
 
 ## 📸 Fitur Utama
 
@@ -34,7 +33,6 @@ Website **Company Profile** dengan fitur **katalog produk** dan **sistem pemesan
 Lihat Produk → Detail Produk → Isi Form Order → Order Masuk DB → Admin Proses
 ```
 
----
 
 ## 🛠️ Tech Stack
 
@@ -46,7 +44,6 @@ Lihat Produk → Detail Produk → Isi Form Order → Order Masuk DB → Admin P
 - **Icons:** Font Awesome 6
 - **DataTables:** jQuery DataTables 1.13
 
----
 
 ## ⚡ Instalasi & Setup
 
@@ -283,7 +280,6 @@ CI4/
 | GET | `/admin/pesanan/detail/{id}` | `AdminOrder::detail` | Detail pesanan |
 | POST | `/admin/pesanan/status/{id}` | `AdminOrder::updateStatus` | Update status |
 
----
 
 ## 🔒 Keamanan
 
@@ -295,7 +291,6 @@ CI4/
 - ✅ **XSS Protection** — Output di-escape dengan `esc()` helper
 - ✅ **Transaction** — Proses order menggunakan database transaction
 
----
 
 ## ⚙️ Konfigurasi WhatsApp
 
@@ -307,8 +302,6 @@ $adminWA = '6281234567890'; // Ganti dengan nomor WA admin Anda
 
 Format: kode negara tanpa `+`, contoh: `628123456789`
 
----
-
 ## 📝 Catatan Pengembangan
 
 - **Stok otomatis berkurang** saat customer order berhasil
@@ -317,8 +310,11 @@ Format: kode negara tanpa `+`, contoh: `628123456789`
 - **Slug** di-generate otomatis dari nama produk/kategori
 - Upload gambar disimpan di `public/uploads/products/`
 
----
 
 ## 📄 Lisensi
 
 MIT License — Bebas digunakan untuk keperluan tugas, demo, atau pengembangan lebih lanjut.
+
+# Compro
+Tugas UAS Matkul Programer
+>>>>>>> 0b1bec2cc400768dcecbec918add9303e0d4bf25
